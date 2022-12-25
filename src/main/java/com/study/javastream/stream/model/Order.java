@@ -6,6 +6,9 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Builder
@@ -26,51 +29,87 @@ public class Order {
         PROCESSED
     }
 
-    public long getId() {
-        return id;
-    }
+    public static List<Order> getOrderList() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        Order order1 = Order.builder().id(1)
+                .status(Order.OrderStatus.CREATED)
+                .createdByUserId(1)
+                .createAt(now.minusHours(4))
+                .orderLines(Arrays.asList(
+                        OrderLine.builder()
+                                .id(1001)
+                                .type(OrderLine.OrderLineType.PURCHASE)
+                                .amount(BigDecimal.valueOf(50_000L))
+                                .build(),
+                        OrderLine.builder()
+                                .id(1002)
+                                .type(OrderLine.OrderLineType.PURCHASE)
+                                .amount(BigDecimal.valueOf(40_000L))
+                                .build()))
+                .build();
 
-    public void setId(long id) {
-        this.id = id;
-    }
+        Order order2 = Order.builder().id(2)
+                .status(Order.OrderStatus.ERROR)
+                .createdByUserId(2)
+                .createAt(now.minusHours(1))
+                .orderLines(Arrays.asList(
+                        OrderLine.builder()
+                                .id(1001)
+                                .type(OrderLine.OrderLineType.PURCHASE)
+                                .amount(BigDecimal.valueOf(70_000L))
+                                .build(),
+                        OrderLine.builder()
+                                .id(1002)
+                                .type(OrderLine.OrderLineType.DISCOUNT)
+                                .amount(BigDecimal.valueOf(-10_000L))
+                                .build()))
+                .build();
 
-    public LocalDateTime getCreateAt() {
-        return createAt;
-    }
+        Order order3 = Order.builder().id(3)
+                .status(Order.OrderStatus.IN_PROGRESS)
+                .createdByUserId(3)
+                .createAt(now.minusHours(9))
+                .orderLines(Collections.singletonList(OrderLine.builder()
+                        .id(1001)
+                        .type(OrderLine.OrderLineType.PURCHASE)
+                        .amount(BigDecimal.valueOf(90_000L))
+                        .build()))
+                .build();
 
-    public void setCreateAt(LocalDateTime createAt) {
-        this.createAt = createAt;
-    }
+        Order order4 = Order.builder().id(4)
+                .status(Order.OrderStatus.PROCESSED)
+                .createdByUserId(2)
+                .createAt(now.minusHours(24))
+                .orderLines(Arrays.asList(
+                        OrderLine.builder()
+                                .id(1001)
+                                .type(OrderLine.OrderLineType.PURCHASE)
+                                .amount(BigDecimal.valueOf(10_000L))
+                                .build(),
+                        OrderLine.builder()
+                                .id(1002)
+                                .type(OrderLine.OrderLineType.DISCOUNT)
+                                .amount(BigDecimal.valueOf(-2_000L))
+                                .build()))
+                .build();
 
-    public long getCreatedByUserId() {
-        return createdByUserId;
-    }
+        Order order5 = Order.builder().id(5)
+                .status(Order.OrderStatus.ERROR)
+                .createdByUserId(3)
+                .createAt(now.minusHours(72))
+                .orderLines(Arrays.asList(
+                        OrderLine.builder()
+                                .id(1001)
+                                .type(OrderLine.OrderLineType.PURCHASE)
+                                .amount(BigDecimal.valueOf(200_000L))
+                                .build(),
+                        OrderLine.builder()
+                                .id(1002)
+                                .type(OrderLine.OrderLineType.DISCOUNT)
+                                .amount(BigDecimal.valueOf(-30_000L))
+                                .build()))
+                .build();
 
-    public void setCreatedByUserId(long createdByUserId) {
-        this.createdByUserId = createdByUserId;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public List<OrderLine> getOrderLines() {
-        return orderLines;
-    }
-
-    public void setOrderLines(List<OrderLine> orderLines) {
-        this.orderLines = orderLines;
+        return Arrays.asList(order1, order2, order3, order4, order5);
     }
 }
