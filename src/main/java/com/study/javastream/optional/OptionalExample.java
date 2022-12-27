@@ -1,22 +1,33 @@
 package com.study.javastream.optional;
 
-import com.study.javastream.stream.model.User;
-
 import java.util.Optional;
 
 public class OptionalExample {
 
     public static void main(String[] args) {
-        //nullPointExceptionTest();
-        optionalTest();
+        // nullPointExceptionTest();
+        // optionalTest();
         advancedOptionalTest();
     }
 
     private static void advancedOptionalTest() {
         Optional<User> maybeUser = Optional.ofNullable(maybeGetUser(true));
         maybeUser.ifPresent(System.out::println);
-        Optional.ofNullable(maybeGetUser(true))
+
+        Optional<Integer> maybeId = Optional.ofNullable(maybeGetUser(true))
                 .map(User::getId);
+        maybeId.ifPresent(System.out::println);
+
+        String userName = Optional.ofNullable(maybeGetUser(true))
+                .map(User::getName)
+                .map(name -> "The name is " + name)
+                .orElse("Name is empty");
+        System.out.println(userName);
+
+        Optional<String> maybeEmail = Optional.ofNullable(maybeGetUser(true))
+                .flatMap(User::getEmailAddress);
+        System.out.println("maybeEmail = " + maybeEmail);
+
     }
 
     public static User maybeGetUser(boolean returnUser) {
@@ -39,8 +50,10 @@ public class OptionalExample {
         Optional<String> maybeEmail2 = Optional.empty();
         Optional<String> maybeEmail3 = Optional.ofNullable(someEmail);
         Optional<String> maybeEmail4 = Optional.ofNullable(nullEmail);
+
         String email = maybeEmail.get();
         System.out.println("email = " + email);
+
         if (maybeEmail2.isPresent()) {
             System.out.println(maybeEmail2.get());
         }
@@ -50,6 +63,7 @@ public class OptionalExample {
 
         String email4 = maybeEmail2.orElseGet(() -> defaultEmail);
         System.out.println("email4 = " + email4);
+
         String email5 = maybeEmail2.orElseThrow(() -> new RuntimeException("Email Not Present"));
     }
 

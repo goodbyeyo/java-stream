@@ -31,10 +31,12 @@ public class Order {
 
     public static List<Order> getOrderList() {
         LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-        Order order1 = Order.builder().id(1)
+        Order order1 = Order.builder()
+                .id(1)
                 .status(Order.OrderStatus.CREATED)
                 .createdByUserId(1)
                 .createAt(now.minusHours(4))
+                .amount(BigDecimal.valueOf(50000))
                 .orderLines(Arrays.asList(
                         OrderLine.builder()
                                 .id(1001)
@@ -52,6 +54,7 @@ public class Order {
                 .status(Order.OrderStatus.ERROR)
                 .createdByUserId(2)
                 .createAt(now.minusHours(1))
+                .amount(BigDecimal.valueOf(70000))
                 .orderLines(Arrays.asList(
                         OrderLine.builder()
                                 .id(1001)
@@ -69,6 +72,7 @@ public class Order {
                 .status(Order.OrderStatus.IN_PROGRESS)
                 .createdByUserId(3)
                 .createAt(now.minusHours(9))
+                .amount(BigDecimal.valueOf(90000))
                 .orderLines(Collections.singletonList(OrderLine.builder()
                         .id(1001)
                         .type(OrderLine.OrderLineType.PURCHASE)
@@ -80,6 +84,7 @@ public class Order {
                 .status(Order.OrderStatus.PROCESSED)
                 .createdByUserId(2)
                 .createAt(now.minusHours(24))
+                .amount(BigDecimal.valueOf(10000))
                 .orderLines(Arrays.asList(
                         OrderLine.builder()
                                 .id(1001)
@@ -97,6 +102,7 @@ public class Order {
                 .status(Order.OrderStatus.ERROR)
                 .createdByUserId(3)
                 .createAt(now.minusHours(72))
+                .amount(BigDecimal.valueOf(200000))
                 .orderLines(Arrays.asList(
                         OrderLine.builder()
                                 .id(1001)
