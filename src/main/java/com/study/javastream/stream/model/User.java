@@ -47,7 +47,7 @@ public class User {
                 .friendUserIds(Arrays.asList(104, 105, 106))
                 .build();
         User user4 = User.builder().
-                id(3).
+                id(4).
                 name("Yarn")
                 .isVerified(false)
                 .emailAddress("yarn@naver.com")

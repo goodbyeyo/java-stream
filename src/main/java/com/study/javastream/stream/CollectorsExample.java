@@ -2,7 +2,6 @@ package com.study.javastream.stream;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,7 +30,7 @@ public class CollectorsExample {
                 .collect(Collectors.reducing(0, (x, y) -> x + y));
         System.out.println("sum = " + sum);
 
-        
+
     }
 }
 
