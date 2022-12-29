@@ -53,7 +53,24 @@ public class User {
                 .createAt(now.minusHours(17))
                 .friendUserIds(Arrays.asList(106, 107))
                 .build();
-        return Arrays.asList(user1, user2, user3, user4);
+        User user5 = User.builder()
+                .id(5)
+                .name("Kensiro")
+                .isVerified(true)
+                .emailAddress("kensiro@naver.com")
+                .createAt(now.minusHours(30))
+                .friendUserIds(Arrays.asList(108, 109))
+                .build();
+        User user6 = User.builder()
+                .id(6)
+                .name("Moo")
+                .isVerified(false)
+                .emailAddress("kensimooro@naver.com")
+                .createAt(now.minusHours(60))
+                .friendUserIds(Arrays.asList(110, 111, 112, 113, 114, 115))
+                .build();
+
+        return Arrays.asList(user1, user2, user3, user4, user5, user6);
     }
 
     public int getId() {

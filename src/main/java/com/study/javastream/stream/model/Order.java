@@ -41,7 +41,7 @@ public class Order {
                         OrderLine.builder()
                                 .id(1001)
                                 .type(OrderLine.OrderLineType.PURCHASE)
-                                .amount(BigDecimal.valueOf(50_000L))
+                                .amount(BigDecimal.valueOf(60_000L))
                                 .build(),
                         OrderLine.builder()
                                 .id(1002)
