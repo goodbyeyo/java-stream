@@ -33,7 +33,7 @@ public class User {
                 .id(2)
                 .name("Yen")
                 .isVerified(false)
-                .emailAddress("hero@naver.com")
+//                .emailAddress("hero@naver.com")
                 .createAt(now.minusHours(10))
                 .friendUserIds(Arrays.asList(104, 105, 106))
                 .build();

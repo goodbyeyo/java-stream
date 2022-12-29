@@ -28,7 +28,7 @@ public class User {
                 .isVerified(true)
                 .emailAddress("mary@naver.com")
                 .createAt(now.minusDays(2))
-                .friendUserIds(Arrays.asList(101, 102, 103, 104))
+                .friendUserIds(Arrays.asList(101, 102, 103, 104, 105, 106))
                 .build();
         User user2 = User.builder()
                 .id(2).
@@ -36,7 +36,7 @@ public class User {
                 .isVerified(false)
                 .emailAddress("hero@naver.com")
                 .createAt(now.minusHours(10))
-                .friendUserIds(Arrays.asList(104, 105, 106))
+                .friendUserIds(Arrays.asList(104, 105, 106, 107))
                 .build();
         User user3 = User.builder().
                 id(3).
@@ -44,15 +44,15 @@ public class User {
                 .isVerified(false)
                 .emailAddress("poul@naver.com")
                 .createAt(now.minusDays(7))
-                .friendUserIds(Arrays.asList(104, 105, 106))
+                .friendUserIds(Arrays.asList(108, 109, 110))
                 .build();
         User user4 = User.builder().
                 id(4).
-                name("Yarn")
-                .isVerified(false)
-                .emailAddress("yarn@naver.com")
+                name("Poul")
+                .isVerified(true)
+                .emailAddress("poul@naver.com")
                 .createAt(now.minusHours(17))
-                .friendUserIds(Arrays.asList(106, 107))
+                .friendUserIds(Arrays.asList(111, 112))
                 .build();
         return Arrays.asList(user1, user2, user3, user4);
     }
