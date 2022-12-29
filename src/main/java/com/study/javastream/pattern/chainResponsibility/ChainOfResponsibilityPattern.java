@@ -11,23 +11,17 @@ public class ChainOfResponsibilityPattern {
         OrderProcessStep initiallizeStep = new OrderProcessStep(order -> {
             if (order.getStatus() == Order.OrderStatus.CREATED) {
                 System.out.println("Start Processing Order " + order.getId());
-                Order.builder()
-                        .id(order.getId())
-                        .amount(order.getAmount())
-                        .createAt(order.getCreateAt())
-                        .status(Order.OrderStatus.IN_PROGRESS)
-                        .build();
+                order.setStatus(Order.OrderStatus.IN_PROGRESS);
             }
         });
 
         OrderProcessStep setOrderAmountStep = new OrderProcessStep(order -> {
             if (order.getStatus() == Order.OrderStatus.IN_PROGRESS) {
                 System.out.println("Setting Amount Of Order " + order.getAmount());
-                Order.builder()
-                        .id(order.getId())
-                        .amount(order.getOrderLines().stream()
-                                .map(OrderLine::getAmount)
-                                .reduce(BigDecimal.ZERO, BigDecimal::add));
+                order.setAmount(order.getOrderLines()
+                        .stream()
+                        .map(OrderLine::getAmount)
+                        .reduce(BigDecimal.ZERO, BigDecimal::add));
             }
         });
 
@@ -35,9 +29,7 @@ public class ChainOfResponsibilityPattern {
             if (order.getStatus() == Order.OrderStatus.IN_PROGRESS) {
                 System.out.println("Verifying Order " + order.getId());
                 if (order.getAmount().compareTo(BigDecimal.ZERO) <= 0) {
-                    Order.builder()
-                            .status(Order.OrderStatus.ERROR)
-                            .build();
+                    order.setStatus(Order.OrderStatus.ERROR);
                 }
             }
         });
@@ -45,9 +37,7 @@ public class ChainOfResponsibilityPattern {
         OrderProcessStep processPaymentStep = new OrderProcessStep(order -> {
             if (order.getStatus() == Order.OrderStatus.IN_PROGRESS) {
                 System.out.println("Processing Payment Of Order " + order.getId());
-                Order.builder()
-                        .status(Order.OrderStatus.PROCESSED)
-                        .build();
+                order.setStatus(Order.OrderStatus.PROCESSED);
             }
         });
 

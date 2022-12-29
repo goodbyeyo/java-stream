@@ -2,6 +2,7 @@ package com.study.javastream.stream.model;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
@@ -18,7 +19,9 @@ public class Order {
     private long id;
     private LocalDateTime createAt;
     private long createdByUserId;
+    @Setter
     private OrderStatus status;
+    @Setter
     private BigDecimal amount;
     private List<OrderLine> orderLines;
 
